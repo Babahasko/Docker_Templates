@@ -1,0 +1,14 @@
+services:
+  mariadb:
+    image: mysql:latest # используем последнюю версию MariaDB
+    container_name: mysql
+    ports:
+      - "3306:3306" # проброс порта (хост:контейнер)
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD} # пароль для root пользователя
+    volumes:
+      - mysql_data:/var/lib/mysql # сохраняем данные в volume, чтобы они не пропали при перезапуске контейнера
+    restart: always # автоматический перезапуск контейнера при падении
+
+volumes:
+  mysql_data: # объявление volume для хранения данных базы
